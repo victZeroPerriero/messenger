@@ -12,6 +12,5 @@ spring:
     username: user
     password: user
 
-  mustache:
-    servlet:
-      expose-request-attributes: true
+  freemarker:
+    expose-request-attributes: true

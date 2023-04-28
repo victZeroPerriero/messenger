@@ -1,8 +1,10 @@
 package com.example.messenger.controller;
 
 import com.example.messenger.model.Message;
+import com.example.messenger.model.User;
 import com.example.messenger.repo.MessageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +27,11 @@ public class MainController {
         return "main";
     }
     @PostMapping("/main")
-    public String add(@RequestParam String text,
+    public String add(@AuthenticationPrincipal User user,
+                      @RequestParam String text,
                       @RequestParam String tag,
                       Map<String, Object> map){
-        Message message = new Message(text,tag);
+        Message message = new Message(text,tag,user);
         messageRepository.save(message);
         map.put("messages", messageRepository.findAll());
         return "main";

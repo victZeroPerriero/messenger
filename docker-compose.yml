@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  db_mess:
+    container_name: mess_db
+    image: postgres
+    ports:
+      - "54321:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=user
+      - POSTGRES_DB=db_mess

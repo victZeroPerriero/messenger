@@ -1,2 +1,17 @@
 server:
   port: 8088
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:54321/db_mess
+    username: user
+    password: user
+
+  mustache:
+    servlet:
+      expose-request-attributes: true

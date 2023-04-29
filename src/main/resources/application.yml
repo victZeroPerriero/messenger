@@ -14,3 +14,7 @@ spring:
 
   freemarker:
     expose-request-attributes: true
+
+upload:
+  path: /home/victor/Downloads/messenger/uploads
+

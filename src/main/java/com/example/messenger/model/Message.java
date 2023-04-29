@@ -19,6 +19,8 @@ public class Message {
     private String text;
     @Column(name = "tag")
     private String tag;
+    @Column(name = "filename")
+    private String filename;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;

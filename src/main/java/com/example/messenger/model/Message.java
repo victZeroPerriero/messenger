@@ -2,7 +2,10 @@ package com.example.messenger.model;
 
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -15,6 +18,8 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Please fill the message")
+    @Length(max = 2048, message = "Message too long {more than 2kB}")
     @Column(name = "text")
     private String text;
     @Column(name = "tag")

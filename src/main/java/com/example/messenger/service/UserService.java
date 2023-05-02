@@ -4,8 +4,10 @@ import com.example.messenger.model.Role;
 import com.example.messenger.model.User;
 import com.example.messenger.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final MailSender mailSender;
+
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
@@ -29,6 +34,7 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setUsername(user.getUsername());
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
 //        sendMessage(user);
